@@ -1,23 +1,17 @@
-import logo from './logo.svg';
+import { useState } from 'react';
 import './App.css';
+import Header from './components/header';
+import { TABS_LIST } from './constants';
+import DataTable from './components/table';
 
-function App() {
+const App = () => {
+  const [tab, setTab] = useState(TABS_LIST[0].value)
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className='app'>
+      <Header tabs={TABS_LIST} selectedTab={tab} setSelectedTab={setTab}/>
+
+      <DataTable/>
     </div>
   );
 }
