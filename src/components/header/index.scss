@@ -1,0 +1,25 @@
+.header-component {
+  .MuiPaper-root {
+    display: flex;
+    flex-direction: row !important;
+    justify-content: space-between;
+
+    .group-select {
+      width: 200px;
+      margin: 3px 20px 0 0;
+    }
+
+    .new-group-field {
+      margin: 3px 10px 0 0;
+    }
+
+    .add-new-group-btn {
+      margin: 12px 30px 0 0;
+    }
+
+    .right-bar {
+      display: flex;
+      flex-direction: row;
+    }
+  }
+}
