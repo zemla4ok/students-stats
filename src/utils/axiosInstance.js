@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const axiosInstance = axios.create({
-  baseURL: 'https://arcane-retreat-16467.herokuapp.com/'//'http://0.0.0.0:8080/'
+  baseURL: process.env.REACT_APP_DOMAIN
 });
 
 axiosInstance.interceptors

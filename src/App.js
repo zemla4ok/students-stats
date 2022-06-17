@@ -22,6 +22,7 @@ const App = () => {
   const [groupData, setGroupData] = useState(undefined);
   const {isAdmin} = useMemo(() => {
     const {admin} = queryString.parse(window.location.search);
+    console.log(window.location, process.env.REACT_APP_ADMIN);
     return {
       isAdmin: admin === process.env.REACT_APP_ADMIN
     };
