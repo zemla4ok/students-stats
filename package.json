@@ -2,7 +2,7 @@
   "name": "student-stats",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://zemla4ok.github.io/students-stats",
+  "homepage": "https://zemla4ok.github.io/students.io",
   "dependencies": {
     "@emotion/react": "^11.9.3",
     "@emotion/styled": "^11.9.3",
