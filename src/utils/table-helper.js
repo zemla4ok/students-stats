@@ -3,11 +3,12 @@ import {camelCaseToSentence} from "./helpers";
 
 export const getCols = ([record], editable) => {
   return Object.keys(record)
-  .filter(record => record !== 'id')
+  .filter(field => field !== 'id')
   .map(field => ({
     field,
     headerName: camelCaseToSentence(field),
-    editable
+    editable,
+    width: field === 'name' ? 200 : 80
   }));
 };
 
