@@ -5,21 +5,22 @@ import Header from './components/header';
 import DataTable from './components/table';
 import {addGroup, getGroup, listGroups, updateGroup} from "./services/groups";
 
-import {ALERT_TYPES, TABS_LIST} from './constants';
-import AppLoader from "./components/loader";
-import AppSnackbar from "./components/snackbar";
-import Footer from "./components/footer";
-import {generateStudent, INITIAL_GROUP} from "./utils/table-helper";
-import {sentenceToCamelCase} from "./utils/helpers";
+import {ALERT_TYPES, TABS, TABS_LIST} from './constants';
+import AppLoader from './components/loader';
+import AppSnackbar from './components/snackbar';
+import Footer from './components/footer';
+import {generateStudent, INITIAL_GROUP} from './utils/table-helper';
+import {sentenceToCamelCase} from './utils/helpers';
+import LeadersBoard from './components/leadersboard';
 
 const App = () => {
   const [groups, setGroups] = useState([]);
   const [group, setGroup] = useState([]);
   const [newGroupName, setNewGroupName] = useState('');
-  const [tab, setTab] = useState(TABS_LIST[0].value);
+  const [tab, setTab] = useState(TABS_LIST[1].value);
   const [alert, setAlert] = useState(undefined);
   const [apiKey, setApiKey] = useState('');
-  const [groupData, setGroupData] = useState(undefined);
+  const [groupData, setGroupData] = useState({});
   const {isAdmin} = useMemo(() => {
     const {admin} = queryString.parse(window.location.search);
     return {
@@ -81,6 +82,20 @@ const App = () => {
     });
   }
 
+  const TABS_MAPPER = {
+    [TABS.HOME_TASKS]: (
+      <>
+        <DataTable isAdmin={isAdmin} data={groupData} onChange={handleTableChange}/>
+        {isAdmin && <Footer onStudentAdd={handleAddStudent}
+                            onTaskAdd={handleTaskAdd}
+                            onSave={handleSave}
+                            apiKey={apiKey}
+                            apiKeyChange={setApiKey}/>}
+      </>
+    ),
+    [TABS.LEADERBOARD]: <LeadersBoard/>
+  }
+
   return (
     <div className='app'>
       <Header tabs={TABS_LIST}
@@ -94,19 +109,7 @@ const App = () => {
               handleCreateNewGroup={handleCreateNewGroup}
               setNewGroupName={setNewGroupName}/>
 
-      {
-        groupData === undefined ?
-          <AppLoader/> : (
-            <>
-              <DataTable isAdmin={isAdmin} data={groupData} onChange={handleTableChange}/>
-              {isAdmin && <Footer onStudentAdd={handleAddStudent}
-                                  onTaskAdd={handleTaskAdd}
-                                  onSave={handleSave}
-                                  apiKey={apiKey}
-                                  apiKeyChange={setApiKey}/>}
-            </>
-          )
-      }
+      {groupData === undefined ? <AppLoader/> : TABS_MAPPER[tab]}
       <AppSnackbar error={alert} resetError={() => setAlert(null)}/>
     </div>
   );
