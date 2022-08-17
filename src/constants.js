@@ -20,3 +20,7 @@ export const ALERT_TYPES = {
   INFO: 'info',
   SUCCESS: 'success'
 }
+
+export const RESPONSE_STATUSES = {
+  UNAUTHORIZED: 401
+}
