@@ -8,8 +8,10 @@ import {FIELDS, schema} from '../../validations/new-password';
 
 import './index.scss';
 import useLogin from '../../utils/auth';
+import {SEVERITY, useToastNotification} from "../../context/toast-notification";
 
 const NewPassword = () => {
+  const {setMessage} = useToastNotification();
   // const {login} = useLogin()
   // const [loading, setLoading] = useState(false);
   //
@@ -30,10 +32,14 @@ const NewPassword = () => {
   //   });
   // };
 
+  const onClick = () => {
+    setMessage({message: 'hello', severity: SEVERITY.ERROR});
+  }
+
   return (
     <div className="new-password-container">
       <div className="new-password-form">
-        <div className="h2-title bold primary-color">New Password</div>
+        <div className="h2-title bold primary-color" onClick={onClick}>New Password</div>
 
         {/*<form onSubmit={handleSubmit(onSubmit)}>*/}
         {/*  <Controller*/}

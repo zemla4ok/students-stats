@@ -8,10 +8,12 @@ import {FIELDS, schema} from '../../validations/login';
 
 import './index.scss';
 import useLogin from '../../utils/auth';
+import {SEVERITY, useToastNotification} from '../../context/toast-notification';
 
 const Login = () => {
   const {login} = useLogin()
   const [loading, setLoading] = useState(false);
+  const {setMessage} = useToastNotification();
 
   const {handleSubmit, formState: {errors}, control} = useForm({
     resolver: yupResolver(schema)
@@ -27,6 +29,8 @@ const Login = () => {
     .catch((err) => {
       console.error(err);
       setLoading(false);
+      console.log(err);
+      setMessage({message: err.data, severity: SEVERITY.ERROR});
     });
   };
 

@@ -11,8 +11,10 @@ import AppSnackbar from './components/snackbar';
 import Login from "./components/login";
 import useLogin from "./utils/auth";
 import NewPassword from "./components/new-password";
+import {useToastNotification} from "./context/toast-notification";
 
 const App = () => {
+  const {message, setMessage} = useToastNotification();
   const {isAuthenticated, getUser} = useLogin();
   const user = getUser();
   console.log(isAuthenticated() ,user);
@@ -48,7 +50,7 @@ const App = () => {
       {/*        setNewGroupName={setNewGroupName}/>*/}
 
       {/*{groupData === undefined ? <AppLoader/> : TABS_MAPPER[tab]}*/}
-      {/*<AppSnackbar error={alert} resetError={() => setAlert(null)}/>*/}
+      <AppSnackbar error={message} resetError={() => setMessage(null)}/>
     </div>
   );
 }
