@@ -10,11 +10,12 @@ import AppLoader from './components/loader';
 import AppSnackbar from './components/snackbar';
 import Login from "./components/login";
 import useLogin from "./utils/auth";
+import NewPassword from "./components/new-password";
 
 const App = () => {
-  const {isAuthenticated} = useLogin();
-console.log(isAuthenticated());
-
+  const {isAuthenticated, getUser} = useLogin();
+  const user = getUser();
+  console.log(isAuthenticated() ,user);
   // const TABS_MAPPER = {
   //   [TABS.HOME_TASKS]: (
   //     <>
@@ -31,7 +32,8 @@ console.log(isAuthenticated());
 
   return (
     <div className='app'>
-      <Login/>
+      {!isAuthenticated() && <Login/>}
+      {isAuthenticated() && !user?.activated && <NewPassword/>}
 
 
       {/*<Header tabs={TABS_LIST}*/}
