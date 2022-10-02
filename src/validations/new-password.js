@@ -1,10 +1,11 @@
 import * as yup from 'yup';
 
 export const FIELDS = {
-  LOGIN: 'username',
+  OLD_PASSWORD: 'oldPassword',
+  NEW_PASSWORD: 'newPassword',
 }
 
 export const schema = yup.object().shape({
-  [FIELDS.LOGIN]: yup.string().required(),
-  [FIELDS.PASSWORD]: yup.string().required(),
+  [FIELDS.OLD_PASSWORD]: yup.string().required(),
+  [FIELDS.NEW_PASSWORD]: yup.string().required(),
 })

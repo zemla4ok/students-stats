@@ -1,7 +1,8 @@
-import {loginUser} from '../services/users';
+import * as authService from '../services/auth';
+import * as usersService from '../services/users';
 
 const USER_STORAGE_KEY = 'user';
-const TOKEN_STORAGE_KEY = 'token';
+export const TOKEN_STORAGE_KEY = 'token';
 
 const useLogin = () => {
   const removeActiveUser = () => localStorage.removeItem(USER_STORAGE_KEY);
@@ -18,7 +19,7 @@ const useLogin = () => {
   const isAuthenticated = () => !!getActiveToken();
 
   const login = (data) => {
-    return loginUser(data)
+    return authService.loginUser(data)
     .then((result) => {
       setActiveUser(result.user);
       setActiveToken(result.token);
@@ -26,10 +27,21 @@ const useLogin = () => {
     });
   }
 
+  const activateUser = (data) => {
+    return usersService.activate(data)
+    .then(user => {
+      setActiveUser(user);
+    })
+    .catch(err => {
+      console.log('err', err)
+    })
+  }
+
   return {
     login,
     getUser: getActiveUser,
-    isAuthenticated
+    isAuthenticated,
+    activateUser
   }
 }
 

@@ -1,5 +1,5 @@
 import axiosInstance from '../utils/axiosInstance';
 
-const SERVICE_NAME = 'auth';
+const SERVICE_NAME = 'users';
 
-export const loginUser = (data) => axiosInstance.post(`/${SERVICE_NAME}/login`, data);
+export const activate = (data) => axiosInstance.put(`/${SERVICE_NAME}/activate`, data);

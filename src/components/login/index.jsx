@@ -27,9 +27,7 @@ const Login = () => {
       window.location.reload();
     })
     .catch((err) => {
-      console.error(err);
       setLoading(false);
-      console.log(err);
       setMessage({message: err.data, severity: SEVERITY.ERROR});
     });
   };

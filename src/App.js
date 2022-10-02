@@ -36,6 +36,7 @@ const App = () => {
     <div className='app'>
       {!isAuthenticated() && <Login/>}
       {isAuthenticated() && !user?.activated && <NewPassword/>}
+      {isAuthenticated() && user?.activated && <div>table</div>}
 
 
       {/*<Header tabs={TABS_LIST}*/}
